@@ -5,6 +5,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { EVENT_CONFIG } from "@/config/event";
+// Hacker-style boot screen overlay (see src/components/BootLoader.tsx to
+// customize or disable it — BOOT_LOADER_CONFIG.enabled = false).
+import BootLoader from "@/components/BootLoader";
 
 const inter = Inter({ subsets: ["latin"], display: "swap" });
 
@@ -19,6 +22,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={`${inter.className} antialiased bg-bg text-text`}>
+        {/* Boot overlay renders on top; page content loads underneath it. */}
+        <BootLoader />
         {children}
       </body>
     </html>
