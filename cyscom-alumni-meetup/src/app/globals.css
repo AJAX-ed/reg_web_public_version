@@ -105,14 +105,39 @@ body {
   to   { transform: translateY(130vh); }
 }
 
-/* Each revealed boot log line fades/slides in quickly */
-.boot-line {
-  animation: boot-line-in 0.25s ease-out both;
+/* Slow CRT-style scanline sweeping down the screen (very faint, GPU-only) */
+.crt-scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -10%;
+  height: 18%;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(96, 165, 250, 0.045),
+    transparent
+  );
+  animation: crt-sweep 2.6s linear infinite;
 }
 
-@keyframes boot-line-in {
-  from { opacity: 0; transform: translateX(-6px); }
-  to   { opacity: 1; transform: translateX(0); }
+@keyframes crt-sweep {
+  from { transform: translateY(-20vh); }
+  to   { transform: translateY(120vh); }
+}
+
+/* "ACCESS GRANTED" banner — quick glitch slam-in (subtle, no neon glow) */
+.boot-granted {
+  animation: boot-granted-in 0.45s steps(6, end) both;
+}
+
+@keyframes boot-granted-in {
+  0%   { opacity: 0; transform: translateX(-8px); letter-spacing: 0.55em; }
+  35%  { opacity: 1; transform: translateX(3px); }
+  55%  { transform: translateX(-2px); }
+  75%  { transform: translateX(1px); }
+  100% { opacity: 1; transform: translateX(0); letter-spacing: 0.3em; }
 }
 
 /* Blinking terminal cursor */
@@ -134,7 +159,9 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .matrix-column,
   .boot-line,
-  .boot-cursor {
+  .boot-cursor,
+  .crt-scan,
+  .boot-granted {
     animation: none;
   }
 }
