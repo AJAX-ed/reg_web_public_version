@@ -79,3 +79,62 @@ body {
          bg-transparent px-4 py-2.5 text-sm font-medium text-text transition
          hover:bg-surface-2 hover:border-accent-blue/40 active:scale-[0.98];
 }
+
+/* =============================================================================
+   Boot loader (src/components/BootLoader.tsx) — terminal boot screen styles.
+   Subtle by design: low-opacity matrix columns, no neon glow.
+   To disable the whole loader, set BOOT_LOADER_CONFIG.enabled = false in
+   src/components/BootLoader.tsx (no CSS changes needed).
+   ============================================================================= */
+
+/* Falling glyph columns behind the terminal window (very faint) */
+.matrix-column {
+  position: absolute;
+  top: -40%;
+  white-space: pre;
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--accent-2);
+  animation-name: matrix-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes matrix-fall {
+  from { transform: translateY(-30%); }
+  to   { transform: translateY(130vh); }
+}
+
+/* Each revealed boot log line fades/slides in quickly */
+.boot-line {
+  animation: boot-line-in 0.25s ease-out both;
+}
+
+@keyframes boot-line-in {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Blinking terminal cursor */
+.boot-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 14px;
+  margin-top: 2px;
+  background: var(--accent);
+  animation: boot-blink 1s steps(1) infinite;
+}
+
+@keyframes boot-blink {
+  0%, 50%  { opacity: 1; }
+  51%,100% { opacity: 0; }
+}
+
+/* Respect users who prefer reduced motion — keep loader brief & static */
+@media (prefers-reduced-motion: reduce) {
+  .matrix-column,
+  .boot-line,
+  .boot-cursor {
+    animation: none;
+  }
+}
