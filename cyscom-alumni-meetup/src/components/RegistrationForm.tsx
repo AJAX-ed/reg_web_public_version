@@ -113,12 +113,12 @@ export default function RegistrationForm({ user }: Props) {
   if (status === "success") {
     return (
       <div className="card p-8 text-center sm:p-12">
-        <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-accent-deep/60 ring-2 ring-accent/60 shadow-[0_0_40px_rgba(0,240,255,0.35)]">
+        <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-accent-deep/60 ring-2 ring-accent/40">
           <svg viewBox="0 0 24 24" className="h-8 w-8 text-accent" fill="none" stroke="currentColor" strokeWidth="2.5">
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h3 className="gradient-text glow-text text-2xl font-bold">You&apos;re registered!</h3>
+        <h3 className="text-2xl font-bold text-text">You&apos;re registered!</h3>
         <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-text-muted">
           Thanks, {form.full_name.split(" ")[0] || "friend"}. Your spot at{" "}
           <span className="text-text">{EVENT_CONFIG.name}</span> is saved. A confirmation

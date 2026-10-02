@@ -15,8 +15,8 @@ const config: Config = {
         "surface-2": "#171936", // raised surfaces
         border: "#23264d",      // subtle borders
         accent: {
-          DEFAULT: "#00F0FF",   // neon cyan
-          blue: "#3B82F6",      // electric blue
+          DEFAULT: "#60A5FA",   // softened blue (text highlights) — was neon cyan
+          blue: "#3B82F6",      // primary calm blue accent
           deep: "#1E3A8A",      // deep blue
         },
         text: "#e6e9f5",

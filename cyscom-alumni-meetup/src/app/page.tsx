@@ -1,10 +1,10 @@
 // =============================================================================
 // Home page — the single-page site. Sections are modular: add/remove freely.
-//   Header → Hero → Schedule (placeholder) → Register (auth-gated) → Footer
+//   Header → Hero → Alumni showcase (carousel) → Register (auth-gated) → Footer
 // =============================================================================
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import Schedule from "@/components/Schedule";
+import AlumniCarousel from "@/components/AlumniCarousel";
 import RegisterSection from "@/components/RegisterSection";
 import Footer from "@/components/Footer";
 
@@ -13,8 +13,8 @@ export default function Home() {
     <main className="min-h-screen">
       <Header />
       <Hero />
-      {/* TODO: replace placeholder schedule with real alumni details & program */}
-      <Schedule />
+      {/* Placeholder alumni slideshow — edit ALUMNI_PROFILES in src/config/event.ts */}
+      <AlumniCarousel />
       <RegisterSection />
       <Footer />
     </main>

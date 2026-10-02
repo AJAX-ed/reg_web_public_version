@@ -1,7 +1,9 @@
 /* =============================================================================
-   Global styles — dark theme with electric/neon blue accents.
+   Global styles — dark theme with SUBTLE blue accents (professional, minimal).
    Tailwind directives + a few custom CSS variables & utilities.
-   Palette: near-black background (#0a0a14) with cyan/electric-blue highlights.
+   Palette: near-black background (#0a0a14) with a calm blue highlight (#3B82F6).
+   NOTE: Neon glow effects have been intentionally toned down — use soft
+   borders/solid colors instead of heavy glows or box-shadows.
    ============================================================================= */
 
 @tailwind base;
@@ -14,9 +16,9 @@
   --surface: #111228;     /* card / panel background               */
   --surface-2: #171936;   /* hover / raised surface                */
   --border: #23264d;      /* subtle borders                        */
-  --accent: #00f0ff;      /* neon / electric cyan-blue             */
-  --accent-2: #3b82f6;    /* electric blue                         */
-  --accent-deep: #1e3a8a; /* deep blue for gradients/glow          */
+  --accent: #60a5fa;      /* softened blue for text highlights     */
+  --accent-2: #3b82f6;    /* primary blue accent                   */
+  --accent-deep: #1e3a8a; /* deep blue for subtle gradients        */
   --text: #e6e9f5;        /* primary text                          */
   --text-muted: #8b93b8;  /* secondary text                        */
 }
@@ -29,55 +31,51 @@ html {
 body {
   background-color: var(--bg);
   color: var(--text);
-  /* Soft radial glows to give the dark background depth */
-  background-image:
-    radial-gradient(ellipse 60% 40% at 70% -10%, rgba(30, 58, 138, 0.35), transparent),
-    radial-gradient(ellipse 50% 35% at 10% 110%, rgba(0, 240, 255, 0.07), transparent);
+  /* Very soft depth wash on the dark background (no neon glow) */
+  background-image: radial-gradient(
+    ellipse 60% 40% at 70% -10%,
+    rgba(30, 58, 138, 0.18),
+    transparent
+  );
   background-attachment: fixed;
 }
 
-/* Neon glow used behind headings and on focus rings */
-.glow-text {
-  text-shadow: 0 0 24px rgba(0, 240, 255, 0.35);
-}
-
-/* Gradient headline: cyan -> blue */
+/* Gradient headline: soft blue tones (subtle, not neon) */
 .gradient-text {
-  background: linear-gradient(92deg, var(--accent) 0%, var(--accent-2) 60%, #7dd3fc 100%);
+  background: linear-gradient(92deg, #93c5fd 0%, var(--accent-2) 70%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-/* Card with faint border + inner glow */
+/* Card with faint border + very soft shadow (no glow) */
 .card {
-  @apply rounded-2xl border border-border bg-surface/90 shadow-[0_0_40px_rgba(0,240,255,0.05)];
+  @apply rounded-2xl border border-border bg-surface/90 shadow-sm;
 }
 
 /* Form controls */
 .input {
   @apply w-full rounded-lg border border-border bg-bg/70 px-3.5 py-2.5 text-sm text-text
          placeholder:text-text-muted/60 outline-none transition
-         focus:border-accent/70 focus:ring-2 focus:ring-accent/20;
+         focus:border-accent-blue/70 focus:ring-2 focus:ring-accent-blue/15;
 }
 
 .label {
   @apply mb-1.5 block text-xs font-semibold uppercase tracking-wider text-text-muted;
 }
 
-/* Primary button — electric blue gradient */
+/* Primary button — solid calm blue (no glow shadow) */
 .btn-primary {
   @apply inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm
-         font-semibold text-[#031018] transition
-         bg-[linear-gradient(92deg,var(--accent)_0%,var(--accent-2)_100%)]
-         shadow-[0_0_24px_rgba(0,240,255,0.35)]
-         hover:shadow-[0_0_36px_rgba(0,240,255,0.55)] hover:brightness-110
-         active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none;
+         font-semibold text-white transition
+         bg-accent-blue
+         hover:bg-blue-500 active:scale-[0.98]
+         disabled:opacity-50 disabled:pointer-events-none;
 }
 
 /* Ghost/secondary button */
 .btn-ghost {
   @apply inline-flex items-center justify-center gap-2 rounded-xl border border-border
          bg-transparent px-4 py-2.5 text-sm font-medium text-text transition
-         hover:bg-surface-2 hover:border-accent/40 active:scale-[0.98];
+         hover:bg-surface-2 hover:border-accent-blue/40 active:scale-[0.98];
 }
